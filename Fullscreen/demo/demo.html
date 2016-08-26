@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>全屏滚动</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="../dist/fullscreen.css" />
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				-moz-box-sizing:border-box;
+				-webkit-box-sizing:border-box;
+				box-sizing: border-box;
+			}
+			body{
+				overflow:hidden;
+			}
+			.fullscreen-slide{
+				-webkit-transition:all .3s;
+				transition:all .3s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="fullscreen-container">
+			<div class="fullscreen-wrapper">
+				<div class="fullscreen-slide"></div>
+				<div class="fullscreen-slide"></div>
+				<div class="fullscreen-slide"></div>
+				<div class="fullscreen-slide"></div>
+			</div>
+
+		</div>
+		
+		<script src="../dist/fullscreen.js"></script>
+		<script>
+			var slides=document.querySelectorAll(".fullscreen-slide");
+			function show1() {
+				slides[0].style.background='red';
+			};
+
+			function show2() {
+				slides[1].style.background='green';
+			}
+
+			function show3() {
+				slides[2].style.background='blue';
+			}
+
+			function show4() {
+				slides[3].style.background='purple';
+			}
+			var nf = new NFullscreen(".fullscreen-container", {
+				pagination: true,
+				init:function(fullscreen){
+					show1();
+				},
+				pageChangeEnd: function(fullscreen) {
+					var index = fullscreen.activeIndex;
+					eval('show' + (index + 1) + '()');
+				},
+				paginationClickable:true
+			});
+			
+		</script>
+	</body>
+
+</html>
